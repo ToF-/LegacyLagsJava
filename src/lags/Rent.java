@@ -70,7 +70,7 @@ public class Rent {
             System.err.println("problem reading file " + fileName );
             exit(1);
         } catch (CsvValidationException e) {
-            System.err.println("wrong csv format in file " + fileName);
+            System.err.println("problem reading file " + fileName );
             exit(1);
         }
         switch (command) {
