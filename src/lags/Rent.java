@@ -35,12 +35,16 @@ public class Rent {
                     int bid = Integer.parseInt(args[i + 4]);
                     order = new Order(idt, start, durn, bid);
                 }
-            } else if (args[i].equals("-d")) if (args.length < 2) {
-                System.err.println("usage: Java Rent -d ID");
-                exit(1);
-            } else {
+            } else if (args[i].equals("-d")) {
+                if (args.length < 2) {
+                    System.err.println("usage: Java Rent -d ID");
+                    exit(1);
+                } else {
+                    command = 4;
+                    idt = args[i + 1];
+                }
+            } else if (args[i].equals("-l")) {
                 command = 3;
-                idt = args[i + 1];
             }
         }
         List<Order> orders;
@@ -84,6 +88,20 @@ public class Rent {
                 saveOrders(orders, fileName);
                 break;
             case 3 :
+                System.out.format("%10s %8s %8s %8s\n",
+                        "Id",
+                        "Start",
+                        "Duration",
+                        "Price");
+                for (Order o : orders) {
+                    System.out.format("%10s %8d %8d %8d\n",
+                            o.getId(),
+                            o.getStart(),
+                            o.getDuration(),
+                            o.getPrice());
+                }
+                break;
+            case 4 :
                 final String id = idt;
                 List<Order> select = new ArrayList<Order>();
                 for (Order o : orders) {
